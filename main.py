@@ -4,6 +4,7 @@
 #Ace 1 or 11
 #fix bug - if user bust, game continues
 #Add Ascii Art
+#Get rid of cards and put random_card on card_value
 
 import random
 
