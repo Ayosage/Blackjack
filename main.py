@@ -1,10 +1,8 @@
 #need to do:
 #Add wager tracking
-#recylce rounds
 #Ace 1 or 11
 #fix bug - if user bust, game continues
 #Add Ascii Art
-#Get rid of cards and put random_card on card_value
 
 import random
 
@@ -32,12 +30,12 @@ def play_new_hand():
 #deal 2 cards to each hand
 def deal_hand():
   for hand in player_hands:
-    player_hands[str(hand)] = [random.choice(cards), random.choice(cards)]
+    player_hands[str(hand)] = [random.choice(card_values), random.choice(card_values)]
   
 #check if dealer busts
 def dealer_check():
   while hand_check("dealer_hand") <= 16:
-    player_hands["dealer_hand"].append(random.choice(cards))
+    player_hands["dealer_hand"].append(random.choice(card_values))
   return hand_check("dealer_hand")
 
 # the algorithm to check the value of a hand 
@@ -52,7 +50,7 @@ def user_new_card():
   hit = input("Do you want another card? y/n \n")
   while hit == "y":
     if hit == "y":
-      player_hands["user_hand"].append(random.choice(cards))
+      player_hands["user_hand"].append(random.choice(card_values))
       print(f'Your Hand total is: {hand_check("user_hand")}')
       print(f' Your Hand is: {player_hands["user_hand"]}')
       if hand_check("user_hand") > 21:
@@ -65,7 +63,7 @@ def computer_check():
   for num in range(0, num_of_players):
     hand_check("cp_hand_" + str(num + 1))
     while hand_check("cp_hand_" + str(num + 1)) <= 16:
-      player_hands["cp_hand_" + str(num + 1)].append(random.choice(cards))
+      player_hands["cp_hand_" + str(num + 1)].append(random.choice(card_values))
 
 #final score check
 def final_check():
@@ -81,9 +79,7 @@ def final_check():
   print(win_hand)
   print(high_score)
   print(player_hands)
-    
-        
-cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
+  
 card_value = {
   "2": 2,
   "3": 3,
@@ -99,19 +95,20 @@ card_value = {
   "K": 10.3,
   "A": 11,
 }
+card_values = list(card_value.keys())
 
-
-play = play_new_hand()
-while play == True:
+play = True
+while play:
+  play_new_hand()
   deal_hand()
   print(f'Your Hand: {player_hands["user_hand"]}')
   dealer_check()
   if dealer_check() > 21:
     print("Dealer Bust, Table Wins")
     print(player_hands["dealer_hand"])
-  else:
-    print(f'The dealers hand is: [{player_hands["dealer_hand"][0]}, _]')
-    user_new_card()
-    computer_check()
-    final_check()
-    break
+    continue
+  
+  print(f'The dealers hand is: [{player_hands["dealer_hand"][0]}, _]')
+  user_new_card()
+  computer_check()
+  final_check()
