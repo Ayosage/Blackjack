@@ -74,6 +74,13 @@ def final_check():
   print(win_hand)
   print(high_score)
   print(player_hands)
+
+def end_play():
+  end = input("Do you want to play another round of Blackjack? Y/N \n").lower()
+  if end == "y":
+    return True
+  else:
+    return False
   
 card_value = {
   "2": 2,
@@ -107,3 +114,4 @@ while play:
   user_new_card()
   computer_check()
   final_check()
+  play = end_play()
