@@ -1,6 +1,5 @@
 #need to do:
 #Add wager tracking
-#Ace 1 or 11
 #Add Ascii Art
 
 import random
@@ -37,6 +36,8 @@ def hand_check(hand):
   hand_total = 0
   for card in player_hands[str(hand)]:
     hand_total += card_value[str(card)]
+  if 'A' in player_hands[str(hand)] and hand_total > 21.6:
+    hand_total -= 10
   return hand_total
 
 #user draw
