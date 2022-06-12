@@ -1,5 +1,5 @@
 #need to do:
-#Add wager tracking
+#Add wager tracking & add variable text for new game or new round - new game clears wager pot - new round keeps user pot
 #Ace 1 or 11
 #fix bug - if user bust, game continues
 #Add Ascii Art
