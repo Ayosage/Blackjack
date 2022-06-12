@@ -1,7 +1,6 @@
 #need to do:
-#Add wager tracking & add variable text for new game or new round - new game clears wager pot - new round keeps user pot
+#Add wager tracking
 #Ace 1 or 11
-#fix bug - if user bust, game continues
 #Add Ascii Art
 
 import random
@@ -16,16 +15,11 @@ player_hands_list = []
 
 #Start New Game, create hands as lists in dictionary player_hands
 def play_new_hand():
-  new_hand = input("Do you want to play a new hand of Blackjack? y/n \n").lower()
   num_players = int(input("How many other players are at the table? \n"))
   player_hands["dealer_hand"] = []
   player_hands["user_hand"] = []
   for num in range(0, num_players):
     player_hands["cp_hand_" + str(num + 1)] = []
-  if new_hand == "y":
-    return True
-  elif new_hand == "n":
-    return False
 
 #deal 2 cards to each hand
 def deal_hand():
@@ -49,12 +43,13 @@ def hand_check(hand):
 def user_new_card():
   hit = input("Do you want another card? y/n \n")
   while hit == "y":
-    if hit == "y":
+    if hit == "y": 
       player_hands["user_hand"].append(random.choice(card_values))
-      print(f'Your Hand total is: {hand_check("user_hand")}')
+      print(f'Your Hand total is: {round(hand_check("user_hand"))}')
       print(f' Your Hand is: {player_hands["user_hand"]}')
-      if hand_check("user_hand") > 21:
+      if hand_check("user_hand") > 21.6:
         print("Bust, You Lose")
+        break
     hit = input("Do you want another card? y/n \n")
 
 #checks computer hands for bust
